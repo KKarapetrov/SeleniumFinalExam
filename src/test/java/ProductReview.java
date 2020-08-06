@@ -53,6 +53,5 @@ public class ProductReview {
         driver.findElement(By.cssSelector("ul.nav-tabs>li:nth-of-type(2)")).click();
         Assert.assertTrue(driver.findElement(By.cssSelector("div#review")).getText().contains("Very good product, worth it"), "review not successful");
         Assert.assertTrue(driver.findElement(By.cssSelector("div#review")).getText().contains(reviewerName), "review not successful");
-
     }
 }
