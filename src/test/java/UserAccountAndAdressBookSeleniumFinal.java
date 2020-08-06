@@ -20,6 +20,8 @@ public class UserAccountAndAdressBookSeleniumFinal {
     private String address = "Sofia, Bulgaria, Lagera, Bogovets str" + RandomStringUtils.randomNumeric(2);
     private String city = "Sofia";
     private String postCode = "1612";
+    private String telephone = RandomStringUtils.randomNumeric(8);
+    private String password = RandomStringUtils.randomNumeric(8);
 
 
 
@@ -32,24 +34,28 @@ public class UserAccountAndAdressBookSeleniumFinal {
 
     @Test
     public void createCustomerAccount() {
-        driver.get("shop.pragmatic.bg");
-        driver.findElement(By.cssSelector("li.dropdown span.hidden-xs")).click();
-        driver.findElement(By.cssSelector("ul.dropdown-menu>li:nth-of-type(1)")).click();
         WebDriverWait wait = new WebDriverWait(driver,5);
+        driver.get("http://shop.pragmatic.bg/");
+        driver.findElement(By.cssSelector("li.dropdown span.hidden-xs")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("ul.dropdown-menu>li:nth-of-type(1)>a")));
+        driver.findElement(By.cssSelector("ul.dropdown-menu>li:nth-of-type(1)>a")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#content>h1")));
         Assert.assertTrue(driver.findElement(By.cssSelector("div#content>h1")).getText().contains("Register Account"),"Not on account creation screen");
         driver.findElement(By.id("input-firstname")).sendKeys(firstName);
         driver.findElement(By.id("input-lastname")).sendKeys(lastName);
         driver.findElement(By.id("input-email")).sendKeys(eMail);
-        driver.findElement(By.id("input-password")).sendKeys("1234567");
-        driver.findElement(By.id("input-confirm")).sendKeys("1234567");
+        driver.findElement(By.id("input-telephone")).sendKeys(telephone);
+        driver.findElement(By.id("input-password")).sendKeys(password);
+        driver.findElement(By.id("input-confirm")).sendKeys(password);
         driver.findElement(By.cssSelector("label.radio-inline:nth-of-type(2)")).click();
         if (!driver.findElement(By.name("agree")).isSelected()){
             driver.findElement(By.name("agree")).click();
         }
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.pull-right>input.btn")));
         driver.findElement(By.cssSelector("div.pull-right>input.btn")).click();
+        driver.findElement(By.cssSelector("div.buttons>div>a")).click();
         driver.findElement(By.xpath("//div//a[text()='Modify your address book entries']")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.pull-right>a")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.pull-right>a")));
         driver.findElement(By.cssSelector("div.pull-right>a")).click();
         driver.findElement(By.id("input-firstname")).sendKeys(firstName);
         driver.findElement(By.id("input-lastname")).sendKeys(lastName);
@@ -61,7 +67,7 @@ public class UserAccountAndAdressBookSeleniumFinal {
         if ((!driver.findElement(By.cssSelector("div.col-sm-10>label:nth-of-type(1)")).isSelected())){
             driver.findElement(By.cssSelector("div.col-sm-10>label:nth-of-type(1)")).click();
         }
-        
+
         driver.findElement(By.cssSelector("div.pull-right>input")).click();
         Assert.assertTrue(driver.findElement(By.cssSelector("div#content>h2")).getText().contains("Address Book Entries"));
         Assert.assertTrue(driver.findElement(By.cssSelector("td.text-left")).getText().contains(firstName),"first name does not match");
@@ -72,9 +78,9 @@ public class UserAccountAndAdressBookSeleniumFinal {
     }
 
 
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
+//    @AfterMethod
+//    public void tearDown(){
+//        driver.quit();
 
-    }
+//    }
 }
