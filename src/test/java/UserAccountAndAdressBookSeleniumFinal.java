@@ -61,6 +61,7 @@ public class UserAccountAndAdressBookSeleniumFinal {
         if ((!driver.findElement(By.cssSelector("div.col-sm-10>label:nth-of-type(1)")).isSelected())){
             driver.findElement(By.cssSelector("div.col-sm-10>label:nth-of-type(1)")).click();
         }
+        
         driver.findElement(By.cssSelector("div.pull-right>input")).click();
         Assert.assertTrue(driver.findElement(By.cssSelector("div#content>h2")).getText().contains("Address Book Entries"));
         Assert.assertTrue(driver.findElement(By.cssSelector("td.text-left")).getText().contains(firstName),"first name does not match");
