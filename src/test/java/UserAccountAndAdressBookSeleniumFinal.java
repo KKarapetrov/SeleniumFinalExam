@@ -10,13 +10,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class UserAccountAndAdressBookSeleniumFinal {
 
 
     private WebDriver driver;
     private String firstName = "Krum" + RandomStringUtils.randomAlphanumeric(2);
     private String lastName = "Karapetrov" + RandomStringUtils.randomAlphanumeric(2);
-    private String eMail = "krum" + RandomStringUtils.randomAlphabetic(1)+".karapetrov@gmail.com";
+    private String eMail = "krum" + RandomStringUtils.randomAlphabetic(2)+".karapetrov@gmail.com";
     private String address = "Sofia, Bulgaria, Lagera, Bogovets str" + RandomStringUtils.randomNumeric(2);
     private String city = "Sofia";
     private String postCode = "1612";
@@ -30,6 +32,7 @@ public class UserAccountAndAdressBookSeleniumFinal {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\RoaMingOne\\ChromeDriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
     }
 
     @Test
@@ -39,7 +42,6 @@ public class UserAccountAndAdressBookSeleniumFinal {
         driver.findElement(By.cssSelector("li.dropdown span.hidden-xs")).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("ul.dropdown-menu>li:nth-of-type(1)>a")));
         driver.findElement(By.cssSelector("ul.dropdown-menu>li:nth-of-type(1)>a")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#content>h1")));
         Assert.assertTrue(driver.findElement(By.cssSelector("div#content>h1")).getText().contains("Register Account"),"Not on account creation screen");
         driver.findElement(By.id("input-firstname")).sendKeys(firstName);
         driver.findElement(By.id("input-lastname")).sendKeys(lastName);
