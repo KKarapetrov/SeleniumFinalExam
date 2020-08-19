@@ -35,7 +35,6 @@ public class ProductReview {
             driver.findElement(By.cssSelector("input[value='5']")).click();
         }
         driver.findElement(By.cssSelector("div.pull-right>button")).click();
-//        Assert.assertTrue(driver.findElement(By.cssSelector("div.alert-success")).getText().contains(" Thank you for your review. It has been submitted to the webmaster for approval."));
         driver.get("http://shop.pragmatic.bg/admin/");
         driver.findElement(By.id("input-username")).sendKeys("admin22");
         driver.findElement(By.id("input-password")).sendKeys("parola123!");
