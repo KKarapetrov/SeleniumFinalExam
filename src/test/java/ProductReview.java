@@ -42,7 +42,6 @@ public class ProductReview {
         driver.findElement(By.cssSelector("div.text-right>button")).click();
         driver.findElement(By.cssSelector("li#menu-catalog")).click();
         driver.findElement(By.cssSelector("li#menu-catalog li:nth-of-type(9)")).click();
-        Assert.assertTrue(driver.findElement(By.cssSelector("div.table-responsive")).getText().contains(reviewerName));
         driver.findElement(By.cssSelector("td>a.btn-primary")).click();
         new Select(driver.findElement(By.id("input-status"))).selectByValue("1");
         driver.findElement(By.cssSelector("div>button")).click();
