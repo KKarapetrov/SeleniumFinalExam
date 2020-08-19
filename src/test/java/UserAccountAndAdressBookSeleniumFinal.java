@@ -16,17 +16,8 @@ public class UserAccountAndAdressBookSeleniumFinal {
 
 
     private WebDriver driver;
-    private String firstName = "Krum" + RandomStringUtils.randomAlphanumeric(2);
-    private String lastName = "Karapetrov" + RandomStringUtils.randomAlphanumeric(2);
-    private String eMail = "krum" + RandomStringUtils.randomAlphabetic(2)+".karapetrov@gmail.com";
-    private String address = "Sofia, Bulgaria, Lagera, Bogovets str" + RandomStringUtils.randomNumeric(2);
-    private String city = "Sofia";
-    private String postCode = "1612";
-    private String telephone = RandomStringUtils.randomNumeric(8);
-    private String password = RandomStringUtils.randomNumeric(8);
 
-
-
+    
     @BeforeMethod
     public void SetUp(){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\RoaMingOne\\ChromeDriver\\chromedriver.exe");
@@ -37,6 +28,14 @@ public class UserAccountAndAdressBookSeleniumFinal {
 
     @Test
     public void createCustomerAccount() {
+        String firstName = "Krum" + RandomStringUtils.randomAlphanumeric(2);
+        String lastName = "Karapetrov" + RandomStringUtils.randomAlphanumeric(2);
+        String eMail = "krum" + RandomStringUtils.randomAlphabetic(2)+".karapetrov@gmail.com";
+        String address = "Sofia, Bulgaria, Lagera, Bogovets str" + RandomStringUtils.randomNumeric(2);
+        String city = "Sofia";
+        String postCode = "1612";
+        String telephone = RandomStringUtils.randomNumeric(8);
+        String password = RandomStringUtils.randomNumeric(8);
         WebDriverWait wait = new WebDriverWait(driver,5);
         driver.get("http://shop.pragmatic.bg/");
         driver.findElement(By.cssSelector("li.dropdown span.hidden-xs")).click();
